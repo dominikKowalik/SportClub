@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="css/stylesLogin.css" />
+
+<div ng-controller="loginController" class="container" >
+         <div class="col-md-10 col-md-offset-1 background fill-max-height cn">
+            <div class="row radius-div col-md-8 inner">
+           <h4><span class = "col-md-10 col-md-offset-1 secondary-font-color form-group">Logowanie do klubu</span></h4>
+                <!--vertical form is default-->
+                <form class="form-vertical" name="loginForm">
+                        <!-- col-md-10 page is divide into 12 parts this div has 10 columns width -->
+                        <div class = "form-group col-md-10 col-md-offset-1">
+                            <input name="login" required ng-model="user.login" id="usernameInput" class="log form-control" ng-minlength="3" placeholder="wprowadz nazwe uzytkownika">
+                            <span class="secondary-font-color"  ng-show="loginForm.$dirty  && loginForm.login.$error.required">wprowadz login</span>
+                            <span class="secondary-font-color" ng-show="loginForm.$dirty  && loginForm.login.$error.minlength">minimalna dlugosc loginu to trzy znaki</span>
+                        </div>
+                        <!-- col-md-10 page is divide into 12 parts this div has 10 columns width -->
+                        <div class = "form-group col-md-10 col-md-offset-1">
+                            <input  ng-model="user.password" name="password" required type="password" class="pass form-control" ng-minlength="3" placeholder="wprowadz haslo" >
+                            <span class="secondary-font-color" ng-show="loginForm.$dirty  && loginForm.password.$error.required">wprowadz haslo</span>
+                            <span class="secondary-font-color" ng-show="loginForm.$dirty  && loginForm.password.$error.minlength">minimalna dlugosc hasla to trzy znaki</span>
+                        </div>
+                        <!-- col-md-10 page is divide into 12 parts this div has 10 columns width -->
+                        <div class = "form-group col-md-10 col-md-offset-1">
+                            <input ng-disabled="loginForm.$invalid" type="button" ng-click="loginUser()" id="buttonSubmitLoginForm" class="btn btn-primary btn-block" value = "zaloguj"/>
+                        </div>
+                    </form>
+            </div>
+         </div>
+ </div>
+
+
+
+
+
+
+

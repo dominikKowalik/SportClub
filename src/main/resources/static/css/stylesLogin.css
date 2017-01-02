@@ -1,0 +1,40 @@
+.background{
+    background-color: ghostwhite;
+}
+
+.secondary-font-color{
+    color:darkgrey;
+}
+
+.fill-max-height {
+    min-height: 100vh;
+    height: 100vh;
+}
+/*radius corners and nice border*/
+.radius-div{
+    border: 2px solid #a1a1a1;
+    padding: 5vh;
+    border-radius: 5px;
+    height: 35vh;
+}
+/**/
+.cn {
+    display: flex;
+    justify-content: center;
+}
+.inner {
+    align-self: center;
+}
+
+
+.log.ng-dirty.ng-valid{
+    background-color: lightgreen;
+}
+
+.pass.ng-dirty.ng-valid{
+    background-color: lightgreen;
+}
+
+body{
+    background-color:lightgrey;
+}
