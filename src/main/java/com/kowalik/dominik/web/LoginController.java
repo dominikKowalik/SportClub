@@ -52,7 +52,6 @@ public class LoginController {
     Employee employee;
 
 
-
     @GetMapping
     @CrossOrigin(origins = "http://localhost:9000")
     public ResponseEntity<String> login(){

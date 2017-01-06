@@ -4,6 +4,7 @@ import com.kowalik.dominik.dao.AccountRepository;
 import com.kowalik.dominik.model.Account;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import java.util.Objects;
  */
 
 @Service("customUserDetailsService")
+@Scope("prototype")
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -36,6 +38,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
         System.out.println(account.toString());
         return new User(account.getLogin(),account.getPassword(), true, true, true, true,
-                AuthorityUtils.createAuthorityList("USER"));
+                AuthorityUtils.createAuthorityList(account.getRole()));
     }
 }

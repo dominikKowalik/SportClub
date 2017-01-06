@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name="Adresy")
 @Component("address")
 public class Address{
-
     @Id
     @Column(name = "id_adresu")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

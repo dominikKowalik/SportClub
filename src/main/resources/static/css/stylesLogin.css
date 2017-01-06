@@ -18,10 +18,12 @@
     height: 35vh;
 }
 /**/
+
 .cn {
     display: flex;
     justify-content: center;
 }
+
 .inner {
     align-self: center;
 }
