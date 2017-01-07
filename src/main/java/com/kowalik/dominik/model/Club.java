@@ -40,6 +40,7 @@ public class Club {
     @Column(name = "nazwa", length = 30, unique = true)
     private String name;
 
+
     @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
     private Set<Building> buildingSet;
 

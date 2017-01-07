@@ -7,15 +7,15 @@
 }
 
 .fill-max-height {
-    min-height: 100vh;
+    min-height:100vh;
     height: 100vh;
 }
 /*radius corners and nice border*/
 .radius-div{
-    border: 2px solid #a1a1a1;
+    border: 1px solid #a1a1a1;
     padding: 5vh;
     border-radius: 5px;
-    height: 35vh;
+    height: 45vh;
 }
 /**/
 
@@ -37,6 +37,20 @@
     background-color: lightgreen;
 }
 
+.log.ng-dirty.ng-invalid{
+    background-color: rgba(252, 83, 91, 0.91);
+
+}
+
+
+.pass.ng-dirty.ng-invalid{
+    background-color: rgba(252, 83, 91, 0.91);
+
+}
+
+
+
 body{
     background-color:lightgrey;
 }
+
