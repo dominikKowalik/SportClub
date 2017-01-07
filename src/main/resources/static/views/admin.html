@@ -1,13 +1,16 @@
-<div ng-controller="loginController" class="container" >
+<div ng-controller="adminController" class="container" >
     <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <p ng-model="club.name" class="navbar-text"  >WebSiteName</p>
+            <h3 class="navbar-text">{{clubName}}</h3>
         </div>
         <ul class="nav navbar-nav">
-            <li><a id="aboutClub" name="aboutClub" href="#">Dane Klubu</a></li>
-            <li><a id="trainers" name="trainers" href="#">Trenerzy</a></li>
-            <li><a id="clubMembers" name="clubMembers" href="#">Zawodnicy</a></li>
+            <li><a id="aboutClub" name="aboutClub" href="#"> Dane Klubu </a></li></h4>
+             <li><a id="trainers" name="trainers" href="#"> Trenerzy </a></li>
+            <li><a id="clubMembers" name="clubMembers" href="#"> Zawodnicy </a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a ng-click="logout()" ui-sref="login"  href="#"><span class="glyphicon glyphicon-log-out"/> Wyloguj</a></li>
         </ul>
     </div>
 </nav>

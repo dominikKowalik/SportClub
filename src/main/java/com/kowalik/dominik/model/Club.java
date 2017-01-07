@@ -25,14 +25,12 @@ import java.util.Set;
 @Scope("prototype")
 public class Club {
 
-
     @Id
     @Column(name = "id_klubu")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer clubId;
 
-    @Basic(optional = false)
-    @Column(name = "rok_zalozenia")
+     @Column(name = "rok_zalozenia")
     @Autowired
     private LocalDate dateOfEstablishment;
 
@@ -41,13 +39,13 @@ public class Club {
     private String name;
 
 
-    @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     private Set<Building> buildingSet;
 
-    @OneToMany(mappedBy = "club", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     private Set<Employee> employeeSet;
 
-    @OneToMany(mappedBy = "club", cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "club", cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
     @Qualifier("clubMemberSet")
     private Set<ClubMember> clubMemberSet;
 

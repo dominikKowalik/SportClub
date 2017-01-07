@@ -28,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests().antMatchers("/","/index.html", "/css/stylesLogin.css",
-         "/js/controllers.js","/js/configuration.js","/js/services.js","/views/login.html","/views/clubMember.html","/views/admin.html").permitAll().anyRequest().authenticated()
+         "/js/controllers.js","/js/configuration.js","/js/services.js","/views/login.html").permitAll().anyRequest().authenticated()
          .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
     }
 }
