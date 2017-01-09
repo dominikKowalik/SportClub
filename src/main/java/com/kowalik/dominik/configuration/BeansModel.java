@@ -95,4 +95,10 @@ public class BeansModel {
     @Bean
     @Scope("prototype")
     public LocalDate localDate(){ return LocalDate.now();}
+
+    @Bean("employeeHashSet")
+    @Scope("prototype")
+    public HashSet<Employee> hashSet(){
+        return new HashSet<>();
+    }
 }

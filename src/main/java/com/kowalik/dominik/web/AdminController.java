@@ -1,13 +1,14 @@
 package com.kowalik.dominik.web;
 
-import com.kowalik.dominik.dao.ClubRepository;
+import com.kowalik.dominik.model.Account;
 import com.kowalik.dominik.model.Club;
+import com.kowalik.dominik.model.Employee;
+import com.kowalik.dominik.service.ClubService;
+import com.kowalik.dominik.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by dominik on 2017-01-07.
@@ -18,16 +19,47 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminController {
 
     @Autowired
-    ClubRepository clubRepository;
+    ClubService clubService;
+
+    @Autowired
+    EmployeeService employeeService;
 
     //only one club in db
-    @GetMapping( value = "/club", produces = "application/json")
-    public ResponseEntity<Club> fetchClub(){
-        Club club = clubRepository.findOne(1);
-        if(club == null){
+    @GetMapping(value = "/club" ,produces = "application/json")
+    public ResponseEntity<Club> fetchClub() {
+        Club club = clubService.getClubById(1);
+        System.out.println(club.getClubMemberSet().size());
+        if (club == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(club, HttpStatus.OK);
     }
+
+    @PostMapping(value = "/trainer/{firstname}/{lastname}/{education}" +
+            "/{fatherName}/{motherName}/{pesel}/{login}/{password}")
+    public ResponseEntity<?> insertTrainer(@PathVariable("firstname") String firstname, @PathVariable("lastname") String
+            lastName, @PathVariable("education") String education, @PathVariable("fatherName")
+                                                   String fatherName, @PathVariable("motherName") String motherName, @PathVariable("pesel") String pesel,
+                                           @PathVariable("login") String login, @PathVariable("password") String password) {
+        Employee employee = new Employee();
+        Account account = new Account();
+        Club club = new Club();
+        club.setClubId(1);
+        employee.setFirstname(firstname);
+        employee.setLastName(lastName);
+        employee.setEducation(education);
+        employee.setMotherName(motherName);
+        employee.setFatherName(fatherName);
+        employee.setPesel(pesel);
+        employee.setClub(club);
+        account.setLogin(login);
+        account.setPassword(password);
+        employee.setAccount(account);
+        account.setRole("ROLE_TRAINER");
+        employeeService.saveEmployee(employee);
+        return new ResponseEntity<>(HttpStatus.OK);
+
+    }
+
 
 }

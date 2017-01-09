@@ -1,4 +1,4 @@
-sportClubApp.service("AuthenticationService", ['$http', '$rootScope', '$log', 'path','CredentialsService', function
+sportClubApp.service("AuthenticationService", ['$http', '$rootScope', '$log', 'path', 'CredentialsService', function
     ($http, $rootScope, $log, path, CredentialsService) {
     this.login = function (login) {
         $log.log($rootScope.authHeader);
@@ -6,8 +6,8 @@ sportClubApp.service("AuthenticationService", ['$http', '$rootScope', '$log', 'p
         $http.get(path + 'login/' + login).then(function (response) {
             var role = response.data.response;
             $log.log(role);
-            if (role == 'ROLE_DIRECTOR') {
-                window.location.replace('/#/director');
+            if (role == 'ROLE_TRAINER') {
+                window.location.replace('/#/trainer');
             } else if (role == 'ROLE_CLUBMEMBER') {
                 window.location.replace('/#/clubMember');
             } else if (role == 'ROLE_ADMIN') {
@@ -32,7 +32,7 @@ sportClubApp.service("CredentialsService", ['$rootScope', '$log', '$cookies', fu
         $cookies.remove('authHeader');
         $cookies.remove('login');
     }
-    
+
     this.setAuthHeader = function (login, password) {
         $rootScope.authHeader = 'Basic ' + btoa(login + ":" + password);
 //store cookie that keeps user logged in for one week or util they logout
@@ -46,7 +46,7 @@ sportClubApp.service("CredentialsService", ['$rootScope', '$log', '$cookies', fu
 //store cookie that keeps user logged in for one week or util they logout
         var cookieExp = new Date();
         cookieExp.setDate(cookieExp.getDate() + 7);
-        $cookies.putObject('login', $rootScope.login , {expires: cookieExp});
+        $cookies.putObject('login', $rootScope.login, {expires: cookieExp});
     }
 
     this.getLogin = function () {
@@ -60,10 +60,10 @@ sportClubApp.service("CredentialsService", ['$rootScope', '$log', '$cookies', fu
     return this;
 }]);
 
-sportClubApp.factory('AuthInterceptor', ['CredentialsService',function(CredentialsService) {
+sportClubApp.factory('AuthInterceptor', ['CredentialsService', function (CredentialsService) {
     return {
         // Send the Authorization header with each request
-        'request': function(config) {
+        'request': function (config) {
             config.headers = config.headers || {};
             config.headers.Authorization = CredentialsService.getAuthHeader();
             return config;
@@ -72,20 +72,37 @@ sportClubApp.factory('AuthInterceptor', ['CredentialsService',function(Credentia
 }]);
 
 
-sportClubApp.factory('CrudService', ['$http','$log','$q', function ($http,path,$log,$q) {
-    return {
-        // Send the Authorization header with each request
-        'fetchOne': function(path) {
-       return $http.get(path).then(function (response) {
-            return response.data;
+sportClubApp.service('ClubService', ['$http', 'path', '$log','$rootScope', function ($http, path, $log,$rootScope) {
+
+    this.setClubName = function () {
+
+        $rootScope.club = {
+            name:''
+        }
+
+        $http.get(path + "admin/club").then(function (response) {
+            $log.log(response);
+            $log.log(response.data);
+            $rootScope.club.name = response.data.name;
         }, function (errResponse) {
             console.error('Error while fetching');
-            return $q.reject(errResponse);
         })
 
-        }
+    }
+    return this;
+}])
+
+
+sportClubApp.factory('trainerService', ['$http','path',function ($http, path) {
+    return {
+        'insertTrainer': function(trainer) {
+        return $http.post(path + 'admin/trainer/' + trainer.firstname + '/' +
+           trainer.lastname + '/' + trainer.education + '/' + trainer.fatherName + '/' + trainer.motherName +
+            '/' + trainer.pesel + '/' + trainer.account.login + '/' + trainer.account.password);
+    }
     }
 }])
+
 
 
 

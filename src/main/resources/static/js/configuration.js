@@ -13,10 +13,19 @@ var sportClubApp = angular.module("sportClub", ['ui.router','ngCookies']).config
              templateUrl: "views/clubMember.html"
          }).state('admin', {//State demonstrating Nested views
              url: "/admin",
-             templateUrl: "views/admin.html"
+             templateUrl: "views/admin/admin.html"
          }).state('trainer', {//State demonstrating Nested views
              url: "/trainer",
              templateUrl: "views/trainer.html"
+         }).state('admin.trainers', {//nested state [products is the nested state of business state]
+             url: "/admin/trainers",
+             templateUrl: "views/admin/adminTrainers.html",
+         }).state('admin.clubMembers', {//nested state [products is the nested state of business state]
+             url: "/admin/clubMembers",
+             templateUrl: "views/admin/adminClubMembers.html",
+         }).state('admin.addTrainer', {//nested state [products is the nested state of business state]
+             url: "/admin/addTrainer",
+             templateUrl: "views/admin/addTrainer.html",
          })
      }]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');

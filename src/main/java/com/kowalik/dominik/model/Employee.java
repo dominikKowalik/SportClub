@@ -1,6 +1,6 @@
 package com.kowalik.dominik.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -47,21 +47,20 @@ public class Employee{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_klubu")
     @Basic(optional = false)
-    @Autowired
+    @JsonBackReference
     private Club club;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_adresu")
-    @Basic(optional = false)
     private Address address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_stanowiska")
-    @Autowired
     private Position position;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_konta")
+    @JsonBackReference
     private Account account;
 
     @ManyToMany(cascade = CascadeType.ALL)

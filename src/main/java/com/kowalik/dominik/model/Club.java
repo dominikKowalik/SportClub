@@ -4,6 +4,7 @@ package com.kowalik.dominik.model;
  * Created by dominik on 2016-12-22.
  */
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -39,14 +40,17 @@ public class Club {
     private String name;
 
 
-    @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "club",  fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Building> buildingSet;
 
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Employee> employeeSet;
 
-    @OneToMany(mappedBy = "club", cascade = {CascadeType.ALL, CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "club" ,cascade = CascadeType.PERSIST ,fetch = FetchType.LAZY)
     @Qualifier("clubMemberSet")
+    @JsonManagedReference
     private Set<ClubMember> clubMemberSet;
 
 

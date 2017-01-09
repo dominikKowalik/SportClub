@@ -1,6 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/stylesLogin.css" />
 
 <div ng-controller="loginController" class="container" >
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -25,7 +26,7 @@
                 <div class = "form-group col-md-10 col-md-offset-1">
                     <div class="secondary-font-color">Haslo:</div>
                 <input  ng-model="user.password" name="password" required type="password" class="pass form-control" ng-minlength="3">
-                    <span class="secondary-font-color"  ng-show="loginForm.$dirty  && loginForm.password.$error.required">wprowadz login</span>
+                    <span class="secondary-font-color"  ng-show="loginForm.$dirty  && loginForm.password.$error.required">wprowadz haslo</span>
                     <span class="secondary-font-color" ng-show="loginForm.$dirty  && loginForm.password.$error.minlength">minimalna dlugosc loginu to trzy znaki</span>
                 </div>
                 <!-- col-md-10 page is divide into 12 parts this div has 10 columns width -->

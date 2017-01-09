@@ -1,0 +1,28 @@
+.mycontent-left {
+    border-right: 1px solid lightgrey;
+}
+
+hr {
+    color: lightgrey;
+    border-style: 1px;
+}
+
+.secondary-font-color{
+    color:darkgrey;
+}
+
+.inputColor.ng-dirty.ng-valid{
+    background-color: lightgreen;
+}
+
+
+.inputColor.ng-dirty.ng-invalid{
+    background-color: rgba(252, 83, 91, 0.91);
+}
+
+.background{
+    background-color: ghostwhite;
+
+    border-radius: 5px;
+
+}
