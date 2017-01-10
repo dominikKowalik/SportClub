@@ -41,21 +41,28 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
             AuthenticationService.logout();
         }
 
+        var newEmployee = function () {
+            return  {
+                firstname: '',
+                lastname: '',
+                education: '',
+                motherName: '',
+                fatherName: '',
+                pesel: '',
 
-        $scope.employee = {
-            firstname: '',
-            lastname: '',
-            education: '',
-            motherName: '',
-            fatherName: '',
-            pesel: '',
-
-            account: {
-                name: '',
-                password: ''
-            }
+                account: {
+                    name: '',
+                    password: ''
+                }
+            };
         }
 
+
+        $scope.employee = newEmployee();
+        $scope.employeeToEdit = newEmployee()
+
+        $scope.trainers = '';
+        $scope.employeesToEdit = '';
 
         $scope.clearForm = function () {
             $scope.employee.firstname = '';
@@ -67,6 +74,20 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
 
             $scope.employee.account.login = '';
             $scope.employee.account.password = '';
+        }
+        
+        $scope.fetchAllTrainers = function () {
+            var promise =
+                trainerService.fetchAllTrainers();
+            promise.then(
+                function (payload) {
+                    $log.log(payload.data);
+                    $scope.trainers = payload.data;
+                },
+                function (errPayload) {
+                    $log.log(errPayload.data);
+                }
+            )
         }
 
         $scope.insertTrainer = function () {
@@ -81,9 +102,44 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
                 $log.log(payload.status);
             },
             function(errorPayload) {
+                alert("Użyktownik już istnieje!");
                 $log.log(errorPayload.status);
             });
         };
+
+        $scope.deleteTrainer = function (firstname, pesel) {
+            var promise =
+                trainerService.deleteTrainer(firstname, pesel);
+
+            promise.then(
+                function(payload) {
+                    $log.log(payload.status);
+                    $scope.fetchAllTrainers();
+                },
+                function(errorPayload) {
+                    $log.log(errorPayload.status);
+                });
+        };
+
+        $scope.setTrainersToEdit = function(pesel){
+            for (var i = 0; i < $scope.trainers.length ; i++) {
+                if($scope.trainers[i].pesel = pesel){
+                    $log.log($scope.trainers[i]);
+                    $scope.employeesToEdit =  [ $scope.trainers[i] ] ;
+
+                    $scope.employeeToEdit.education =  $scope.trainers[i].education;
+                    $scope.employeeToEdit.fatherName =  $scope.trainers[i].fatherName ;
+                    $scope.employeeToEdit.motherName =  $scope.trainers[i].motherName ;
+                    $scope.employeeToEdit.pesel =  $scope.trainers[i].pesel ;
+                    $scope.employeeToEdit.firstname =  $scope.trainers[i].firstname ;
+                    $scope.employeeToEdit.lastname =  $scope.trainers[i].lastname ;
+                    $scope.employeeToEdit.account.name =  $scope.trainers[i].account.name ;
+                    $scope.employeeToEdit.account.password =  $scope.trainers[i].account.password;
+
+                    break;
+                }
+            }
+        }
         $log.log($scope.club.name);
     }]);
 

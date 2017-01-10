@@ -26,7 +26,7 @@ public class Employee{
 
     @Basic(optional = false)
     @Column(name = "nazwisko", length = 30)
-    private String lastName;
+    private String lastname;
 
     @Basic(optional = false)
     @Column(name = "wyksztalcenie", length = 30)
@@ -44,26 +44,26 @@ public class Employee{
     @Column(name = "pesel", length = 30, unique = true)
     private String pesel;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_klubu")
     @Basic(optional = false)
     @JsonBackReference
     private Club club;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER ,cascade = CascadeType.ALL)
     @JoinColumn(name = "id_adresu")
     private Address address;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_stanowiska")
     private Position position;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_konta")
     @JsonBackReference
     private Account account;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinTable(name="Pracownicy_Harmonogramy",
             joinColumns={@JoinColumn(name="id_pracownika")},
             inverseJoinColumns={@JoinColumn(name="id_hramonogramu")})
@@ -85,12 +85,12 @@ public class Employee{
         this.firstname = firstname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastName) {
+        this.lastname = lastName;
     }
 
     public String getEducation() {
@@ -172,7 +172,7 @@ public class Employee{
         return "Employee{" +
                 "employeeId=" + employeeId +
                 ", firstname='" + firstname + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", lastName='" + lastname + '\'' +
                 ", education='" + education + '\'' +
                 ", motherName='" + motherName + '\'' +
                 ", fatherName='" + fatherName + '\'' +
@@ -196,7 +196,7 @@ public class Employee{
             return false;
         if (getFirstname() != null ? !getFirstname().equals(employee.getFirstname()) : employee.getFirstname() != null)
             return false;
-        if (getLastName() != null ? !getLastName().equals(employee.getLastName()) : employee.getLastName() != null)
+        if (getLastname() != null ? !getLastname().equals(employee.getLastname()) : employee.getLastname() != null)
             return false;
         if (getEducation() != null ? !getEducation().equals(employee.getEducation()) : employee.getEducation() != null)
             return false;
@@ -212,7 +212,7 @@ public class Employee{
     public int hashCode() {
         int result = getEmployeeId() != null ? getEmployeeId().hashCode() : 0;
         result = 31 * result + (getFirstname() != null ? getFirstname().hashCode() : 0);
-        result = 31 * result + (getLastName() != null ? getLastName().hashCode() : 0);
+        result = 31 * result + (getLastname() != null ? getLastname().hashCode() : 0);
         result = 31 * result + (getEducation() != null ? getEducation().hashCode() : 0);
         result = 31 * result + (getMotherName() != null ? getMotherName().hashCode() : 0);
         result = 31 * result + (getFatherName() != null ? getFatherName().hashCode() : 0);

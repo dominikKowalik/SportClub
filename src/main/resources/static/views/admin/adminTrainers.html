@@ -1,16 +1,30 @@
-<form class="form-inline">
-    <div class="form-group">
-        <label for="email">Email address:</label>
-        <input type="email" class="form-control" id="email">
-    </div>
-    <div class="form-group">
-        <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd">
-    </div>
-    <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+<div ui-view>
+<div class="table-responsive">
+<table class="table background">
+    <thead>
+    <tr>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Wykształcenie</th>
+        <th>Imie Matki</th>
+        <th>Imie Ojca</th>
+        <th>Pesel</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="x in trainers">
+        <td>{{ x.firstname }}</td>
+        <td>{{ x.lastname }}</td>
+        <td>{{ x.education }}</td>
+        <td>{{ x.motherName }}</td>
+        <td>{{ x.fatherName }}</td>
+        <td>{{ x.pesel }}</td>
+        <td><button ng-click="deleteTrainer(x.firstname, x.pesel)" class="btn btn-danger btn-block col-md-1">Zwolnij</button> </td>
+        <td><button ng-click="setTrainersToEdit(x.pesel)" ui-sref=".editTrainer" class="btn btn-default btn-block col-md-1">Edytuj Dane</button> </td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</div>
 
 

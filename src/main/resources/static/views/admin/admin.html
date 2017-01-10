@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="css/stylesAdmin.css" />
 <div  ng-controller="adminController" class="container-fullwidth" >
     <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -5,21 +6,17 @@
             <h3 class="navbar-text">{{club.name}}</h3>
         </div>
         <ul class="nav navbar-nav">
-            <li><a id="aboutClub" name="aboutClub" href="#"> Dane Klubu </a></li></h4>
-             <li><a ui-sref=".trainers" id="trainers" name="trainers" href="#"> Trenerzy </a></li>
-            <li><a ui-sref=".clubMembers" id="clubMembers" name="clubMembers" href="#"> Zawodnicy </a></li>
-            <li><a ui-sref=".addTrainer" id="addTrainer" name="addTrainer" href="#"> Dodaj Trenera </a></li>
+             <li><a id="aboutClub" name="aboutClub" href="#"> Dane Klubu </a></li></h4>
+             <li><a ng-click="fetchAllTrainers()" ui-sref=".trainers" id="trainers" name="trainers" href="#"> Trenerzy </a></li>
+             <li><a ui-sref=".addTrainer" id="addTrainer" name="addTrainer" href="#"> Dodaj Trenera </a></li>
+             <li><div ng-include="'views/admin/adminFindTrainer.html'"></div></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a ng-click="logout()" ui-sref="login"  href="#"><span class="glyphicon glyphicon-log-out"/> Wyloguj</a></li>
         </ul>
     </div>
 </nav>
-
-
     <div class="col-md-12" ui-view></div>
-
-
 </div>
 
 

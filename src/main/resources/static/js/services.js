@@ -72,12 +72,12 @@ sportClubApp.factory('AuthInterceptor', ['CredentialsService', function (Credent
 }]);
 
 
-sportClubApp.service('ClubService', ['$http', 'path', '$log','$rootScope', function ($http, path, $log,$rootScope) {
+sportClubApp.service('ClubService', ['$http', 'path', '$log', '$rootScope', function ($http, path, $log, $rootScope) {
 
     this.setClubName = function () {
 
         $rootScope.club = {
-            name:''
+            name: ''
         }
 
         $http.get(path + "admin/club").then(function (response) {
@@ -93,13 +93,42 @@ sportClubApp.service('ClubService', ['$http', 'path', '$log','$rootScope', funct
 }])
 
 
-sportClubApp.factory('trainerService', ['$http','path',function ($http, path) {
+sportClubApp.factory('trainerService', ['$http', 'path','$q', function ($http, path, $q) {
     return {
-        'insertTrainer': function(trainer) {
-        return $http.post(path + 'admin/trainer/' + trainer.firstname + '/' +
-           trainer.lastname + '/' + trainer.education + '/' + trainer.fatherName + '/' + trainer.motherName +
-            '/' + trainer.pesel + '/' + trainer.account.login + '/' + trainer.account.password);
-    }
+        'insertTrainer': function (trainer) {
+            return $http.post(path + 'admin/trainer/' + trainer.firstname + '/' +
+                trainer.lastname + '/' + trainer.education + '/' + trainer.fatherName + '/' + trainer.motherName +
+                '/' + trainer.pesel + '/' + trainer.account.login + '/' + trainer.account.password).then(
+                function(response){
+                    return response;
+                },
+                function(errResponse){
+                    console.error('Error while deleting user');
+                    return $q.reject(errResponse);
+                }
+            );
+
+        },
+        'fetchAllTrainers': function () {
+            return $http.get(path + "/admin/allTrainers");
+        },
+        'deleteTrainer': function (firstname, pesel) {
+            return $http.delete(path + 'admin/trainer/' + firstname + '/' + pesel);
+        },
+
+        'update': function (trainer) {
+                return $http.put(path + 'admin/trainer/' + trainer.firstname + '/' +
+                    trainer.lastname + '/' + trainer.education + '/' + trainer.fatherName + '/' + trainer.motherName +
+                    '/' + trainer.pesel + '/' + trainer.account.login + '/' + trainer.account.password).then(
+                    function(response){
+                        return response;
+                    },
+                    function(errResponse){
+                        console.error('Error while deleting user');
+                        return $q.reject(errResponse);
+                    }
+                );
+        }
     }
 }])
 
