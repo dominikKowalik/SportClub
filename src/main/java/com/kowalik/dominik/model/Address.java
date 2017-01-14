@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Created by dominik on 2016-12-22.
@@ -41,9 +40,10 @@ public class Address{
     @Autowired
     private Voivodeship voivodeship;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "address")
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "address")
     @Basic(optional = false)
-    private Set<Employee> employeeSet;
+    private Employee employee;
+
 
     public Integer getAddressId() {
         return addressId;
@@ -93,27 +93,14 @@ public class Address{
         this.voivodeship = voivodeship;
     }
 
-    public Set<Employee> getEmployeeSet() {
-        return employeeSet;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setEmployeeSet(Set<Employee> employeeSet) {
-        this.employeeSet = employeeSet;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-
-    @Override
-    public String toString() {
-        return "Address{" +
-                "addressId=" + addressId +
-                ", number=" + number +
-                ", street='" + street + '\'' +
-                ", zipCode='" + zipCode + '\'' +
-                ", city='" + city + '\'' +
-                ", voivodeship=" + voivodeship +
-                ", employeeSet=" + employeeSet +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -140,5 +127,16 @@ public class Address{
         result = 31 * result + (getZipCode() != null ? getZipCode().hashCode() : 0);
         result = 31 * result + (getCity() != null ? getCity().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", number=" + number +
+                ", street='" + street + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                ", city='" + city + '\'' +
+                '}';
     }
 }

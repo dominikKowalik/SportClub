@@ -1,0 +1,25 @@
+<div ng-controller="trainerController" class="container-fullwidth" >
+    <nav class="navbar navbar-inverse row">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h3 class="navbar-text">{{club.name}}</h3>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ng-click="" ui-sref=".personalInformation"  href="#"><span/>Moje Dane</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a ng-click="logout()" ui-sref="login"  href="#"><span class="glyphicon glyphicon-log-out"/>Wyloguj</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="background:white" class="fill-max-height col-md-10 col-md-offset-1 row">
+    <div ui-view>
+
+    </div>
+</div>
+
+</div>
+
+<link rel="stylesheet" type="text/css" href="css/stylesAdmin.css" />
+<link rel="stylesheet" type="text/css" href="css/stylesLogin.css" />

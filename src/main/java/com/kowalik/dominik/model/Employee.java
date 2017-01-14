@@ -54,13 +54,15 @@ public class Employee{
     @JoinColumn(name = "id_adresu")
     private Address address;
 
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_stanowiska")
     private Position position;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_konta")
     private Account account;
+
 
     @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
     @JoinTable(name="Pracownicy_Harmonogramy",

@@ -153,9 +153,4 @@ public class AdminController {
         }
         return new ResponseEntity<>(deletedEmployeeId, HttpStatus.OK);
     }
-
-
-
-
-
 }

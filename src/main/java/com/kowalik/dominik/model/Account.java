@@ -1,5 +1,6 @@
 package com.kowalik.dominik.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -28,6 +29,10 @@ public class Account {
 
     @Column(name = "rola", length = 30, nullable = false)
     private String role;
+
+    @OneToOne(mappedBy = "account",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Employee employee;
 
     public Integer getAccountId() {
         return accountId;
@@ -94,6 +99,14 @@ public class Account {
         result = 31 * result + (getPassword() != null ? getPassword().hashCode() : 0);
         result = 31 * result + (getRole() != null ? getRole().hashCode() : 0);
         return result;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
 

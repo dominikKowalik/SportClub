@@ -44,7 +44,6 @@ public class ClubMember {
     @JoinTable(name = "Zawodnicy_Dyscypliny",
             joinColumns = {@JoinColumn(name = "id_zawodnika")},
             inverseJoinColumns = {@JoinColumn(name = "id_pracownika")})
-
     private Set<Discipline> disciplineSet;
 
 

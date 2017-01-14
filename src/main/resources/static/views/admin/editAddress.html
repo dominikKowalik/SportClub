@@ -1,0 +1,53 @@
+<div class="container-fullwidth">
+    <form name="addressForm" class="form">
+        <div class="row background">
+            <div class="col-md-6 mycontent-left">
+                <div class="form-group">
+                    <label for="firstname">Numer:</label>
+                    <input ng-maxlength="5" required ng-model="address.number" type="text"
+                           class="form-control inputColor" id="firstname" name="firstname">
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.firstname.$error.required">wpisz numer</span>
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.firstname.$error.maxlength">maksymala długość to 5 liczb</span>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Ulica:</label>
+                    <input ng-maxlength="30" required type="text" class="form-control inputColor" id="lastname"
+                           name="lastname" ng-model="address.street">
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.lastname.$error.required">wpisz nazwe ulicy</span>
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.lastname.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
+                </div>
+                <div class="form-group">
+                    <label for="education">kod pocztowy(bez średnika):</label>
+                    <input ng-minlength="5" ng-maxlength="5" required type="number" id="education" name="education"
+                           ng-model="address.zipCode" class="form-control inputColor">
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.education.$error.required">wpisz kod pocztowy</span>
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.education.$error.maxlength">wymagane 5 liczb</span>
+                </div>
+                <div class="form-group">
+                    <label for="education">miasto:</label>
+                    <input ng-maxlength="30" required type="text" id="motherName" name="motherName"
+                           ng-model="address.city"
+                           class="form-control inputColor">
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.motherName.$error.required">wpisz nazwe miasta</span>
+                    <span class="secondary-font-color"
+                          ng-show="addressForm.$dirty  && addressForm.motherName.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-5">
+                        <button ng-click="updateAddress()" ng-disabled="addressForm.$invalid" type="button"
+                                class="btn btn-success btn-block">Aktualizuj adres trenera
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

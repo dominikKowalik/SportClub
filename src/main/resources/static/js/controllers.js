@@ -162,11 +162,39 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
                 }
             }
         }
+
+       $scope.setTrainerToAddressEdit = function (id) {
+           $log.log(id);
+           $scope.employeeToAddressEditId = id;
+       }
+
+
+
         $log.log($scope.club.name);
     }]);
 
 
+sportClubApp.controller("trainerController", ['$scope', '$rootScope', '$log', 'AuthenticationService'
+    ,'path','trainerService','CredentialsService', function ($scope, $rootScope, $log, AuthenticationService, path,trainerService,CredentialsService) {
+        var promise =
+                trainerService.fetchTrainerByLogin(CredentialsService.getLogin());
+            promise.then(
+                function(payload) {
+                    $log.log('findTrainerByName');
+                    $log.log(payload.data);
+                    $scope.trainer = payload.data;
+                    $scope.navbarText = 'Witaj ' + $scope.trainer.firstname + '!';
+                },
+                function(errorPayload) {
+                    $log.log(errorPayload.status);
+                    $scope.findedTrainer =  [ newEmployee() ];
+                });
+
+        $scope.logout = function () {
+            AuthenticationService.logout();
+        }
 
 
 
 
+    }]);

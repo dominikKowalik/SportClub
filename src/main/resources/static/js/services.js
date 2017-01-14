@@ -92,7 +92,6 @@ sportClubApp.service('ClubService', ['$http', 'path', '$log', '$rootScope', func
     return this;
 }])
 
-
 sportClubApp.factory('trainerService', ['$http', 'path','$q', function ($http, path, $q) {
     return {
         'insertTrainer': function (trainer) {
@@ -112,6 +111,10 @@ sportClubApp.factory('trainerService', ['$http', 'path','$q', function ($http, p
 
         'fetchTrainer': function (pesel) {
             return $http.get(path + "/admin/trainer/" + pesel);
+        },
+
+        'fetchTrainerByLogin': function (login) {
+            return $http.get(path + "trainer/" + login);
         },
 
         'fetchAllTrainers': function () {
