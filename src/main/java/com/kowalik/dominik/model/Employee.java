@@ -60,7 +60,6 @@ public class Employee{
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_konta")
-    @JsonBackReference
     private Account account;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER)

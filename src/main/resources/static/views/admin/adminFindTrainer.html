@@ -1,9 +1,26 @@
-<div style="margin-top:1vh">
-<form class="form-inline">
-  <div class="form-group">
-      <input ng-maxlength="30" required type="text" id="peselInput" name="peselInput"
-             ng-model="pesel" class="form-control inputColor" placeholder="wprowadz pesel">
-      <button ui-sref=".findTrainer" class="btn btn-default">Szukaj</button>
-  </div>
- </form>
+<div ui-view>
+    <div class="table-responsive">
+        <table class="table background">
+            <thead>
+            <tr>
+                <th>Imie</th>
+                <th>Nazwisko</th>
+                <th>Wykształcenie</th>
+                <th>Imie Matki</th>
+                <th>Imie Ojca</th>
+                <th>Pesel</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="x in findedTrainer">
+                <td>{{ x.firstname }}</td>
+                <td>{{ x.lastname }}</td>
+                <td>{{ x.education }}</td>
+                <td>{{ x.motherName }}</td>
+                <td>{{ x.fatherName }}</td>
+                <td>{{ x.pesel }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

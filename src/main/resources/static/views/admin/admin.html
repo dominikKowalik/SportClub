@@ -9,9 +9,19 @@
              <li><a id="aboutClub" name="aboutClub" href="#"> Dane Klubu </a></li></h4>
              <li><a ng-click="fetchAllTrainers()" ui-sref=".trainers" id="trainers" name="trainers" href="#"> Trenerzy </a></li>
              <li><a ui-sref=".addTrainer" id="addTrainer" name="addTrainer" href="#"> Dodaj Trenera </a></li>
-             <li><div ng-include="'views/admin/adminFindTrainer.html'"></div></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li><div>
+                <div style="margin-top:1vh">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <input ng-maxlength="30" ng-model="trainerToFindPesel" required type="text" id="peselInput" name="peselInput"
+                                   ng-model="pesel" class="form-control inputColor" placeholder="wprowadz pesel">
+                            <button ng-click="findTrainer(trainerToFindPesel)" ui-sref=".findTrainer" class="btn btn-default">Szukaj</button>
+                        </div>
+                    </form>
+                </div>
+            </div></li>d,lsd
             <li><a ng-click="logout()" ui-sref="login"  href="#"><span class="glyphicon glyphicon-log-out"/> Wyloguj</a></li>
         </ul>
     </div>

@@ -18,7 +18,6 @@ public class ClubService {
     public Club getClubById(int id) {
         return clubRepository.findOne(id);
     }
-
     public Club saveEmployee(Club club) {
         return clubRepository.save(club);
     }

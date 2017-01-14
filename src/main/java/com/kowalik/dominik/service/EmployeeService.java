@@ -27,9 +27,9 @@ public class EmployeeService {
         return employeeRepository.findOne(id);
     }
 
-    public boolean isEmployeeExistsByFirstnameAndPesel(String firstname, String pesel){
+    public boolean isEmployeeExistsByFirstnameAndPesel(String firstname, String pesel) {
         Employee employee = employeeRepository.findByFirstnameAndPesel(firstname, pesel);
-        if(employee == null)
+        if (employee == null)
             return false;
         else
             return true;
@@ -39,6 +39,20 @@ public class EmployeeService {
         return employeeRepository.findByFirstnameAndPesel(firstname, pesel);
     }
 
+   public boolean updateEmployee(Employee employee) {
+        Employee employee1 = employeeRepository.findOne(employee.getEmployeeId());
+        employee1.setFirstname(employee.getFirstname());
+        employee1.setLastname(employee.getLastname());
+        employee1.setFatherName(employee.getFatherName());
+        employee1.setMotherName(employee.getMotherName());
+        employee1.setEducation(employee.getEducation());
+        employee1.getAccount().setLogin(employee.getAccount().getLogin());
+        employee1.getAccount().setPassword(employee.getAccount().getPassword());
+        if(employeeRepository.save(employee1) == null)
+            return false;
+        else
+            return true;
+   }
 
     public Employee saveEmployee(Employee employee) {
         return employeeRepository.save(employee);
@@ -53,12 +67,12 @@ public class EmployeeService {
         return employees;
     }
 
-    public Integer deleteEmployeeByFirstnameAndPesel(String firstname, String pesel){
-        return employeeRepository.deleteByFirstnameAndPesel(firstname, pesel);
+    public Employee getEmployeeByPesel(String pesel) {
+        return employeeRepository.findByPesel(pesel);
     }
 
-//    public Employee updateEmployee(String employee){
-//        employeeRepository.
-//    }
+    public Integer deleteEmployeeByFirstnameAndPesel(String firstname, String pesel) {
+        return employeeRepository.deleteByFirstnameAndPesel(firstname, pesel);
+    }
 
 }

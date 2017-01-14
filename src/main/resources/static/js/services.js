@@ -109,6 +109,11 @@ sportClubApp.factory('trainerService', ['$http', 'path','$q', function ($http, p
             );
 
         },
+
+        'fetchTrainer': function (pesel) {
+            return $http.get(path + "/admin/trainer/" + pesel);
+        },
+
         'fetchAllTrainers': function () {
             return $http.get(path + "/admin/allTrainers");
         },
@@ -117,14 +122,14 @@ sportClubApp.factory('trainerService', ['$http', 'path','$q', function ($http, p
         },
 
         'update': function (trainer) {
-                return $http.put(path + 'admin/trainer/' + trainer.firstname + '/' +
+                return $http.patch(path + 'admin/trainer/' + trainer.employeeId + "/" + trainer.firstname + '/' +
                     trainer.lastname + '/' + trainer.education + '/' + trainer.fatherName + '/' + trainer.motherName +
-                    '/' + trainer.pesel + '/' + trainer.account.login + '/' + trainer.account.password).then(
+                    '/' + trainer.pesel + '/' + trainer.account.login + '/' + trainer.account.password ).then(
                     function(response){
                         return response;
                     },
                     function(errResponse){
-                        console.error('Error while deleting user');
+                        console.error('Error while patching user');
                         return $q.reject(errResponse);
                     }
                 );

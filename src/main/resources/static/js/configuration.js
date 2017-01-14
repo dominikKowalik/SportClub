@@ -26,7 +26,7 @@ var sportClubApp = angular.module("sportClub", ['ui.router','ngCookies']).config
          }).state('admin.addTrainer', {//nested state [products is the nested state of business state]
              url: "/admin/addTrainer",
              templateUrl: "views/admin/addTrainer.html",
-         }).state('admin.trainers.editTrainer', {
+         }).state('admin.trainers.editTrainer',{
              url: "/editTrainer",
              templateUrl: "views/admin/editTrainer.html"
          })

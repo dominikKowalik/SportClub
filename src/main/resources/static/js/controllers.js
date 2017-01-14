@@ -65,6 +65,7 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
         $scope.employeesToEdit = '';
 
         $scope.clearForm = function () {
+
             $scope.employee.firstname = '';
             $scope.employee.lastname = '';
             $scope.employee.education = '';
@@ -75,7 +76,7 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
             $scope.employee.account.login = '';
             $scope.employee.account.password = '';
         }
-        
+
         $scope.fetchAllTrainers = function () {
             var promise =
                 trainerService.fetchAllTrainers();
@@ -89,6 +90,18 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
                 }
             )
         }
+
+        $scope.updateTrainer = function () {
+            $log.log("updateTrainer");
+            var promise = trainerService.update($scope.employeesToEdit[0]);
+            promise.then(
+                function (payload) {
+                    $log.log(payload.status);
+                },function(errPayload) {
+                    $log.log(errPayload.status);
+                }
+            )
+        };
 
         $scope.insertTrainer = function () {
             var employee = $scope.employee;
@@ -121,21 +134,30 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
                 });
         };
 
+
+        $scope.findedTrainer = [ newEmployee() ];
+
+        $scope.findTrainer = function (pesel) {
+            var promise =
+                trainerService.fetchTrainer(pesel);
+            promise.then(
+                function(payload) {
+                    $log.log(payload.data);
+                    $scope.findedTrainer =  [ payload.data ];
+                 },
+                function(errorPayload) {
+                    $log.log(errorPayload.status);
+                    $scope.findedTrainer =  [ newEmployee() ];
+                });
+        }
+
         $scope.setTrainersToEdit = function(pesel){
             for (var i = 0; i < $scope.trainers.length ; i++) {
                 if($scope.trainers[i].pesel = pesel){
                     $log.log($scope.trainers[i]);
+                    $scope.trainers[i].pesel = parseInt($scope.trainers[i].pesel);
                     $scope.employeesToEdit =  [ $scope.trainers[i] ] ;
-
-                    $scope.employeeToEdit.education =  $scope.trainers[i].education;
-                    $scope.employeeToEdit.fatherName =  $scope.trainers[i].fatherName ;
-                    $scope.employeeToEdit.motherName =  $scope.trainers[i].motherName ;
-                    $scope.employeeToEdit.pesel =  $scope.trainers[i].pesel ;
-                    $scope.employeeToEdit.firstname =  $scope.trainers[i].firstname ;
-                    $scope.employeeToEdit.lastname =  $scope.trainers[i].lastname ;
-                    $scope.employeeToEdit.account.name =  $scope.trainers[i].account.name ;
-                    $scope.employeeToEdit.account.password =  $scope.trainers[i].account.password;
-
+                    $log.log($scope.employeesToEdit);
                     break;
                 }
             }

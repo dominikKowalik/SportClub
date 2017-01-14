@@ -61,6 +61,33 @@ public class AdminController {
         employeeService.saveEmployee(employee);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @PatchMapping(value = "/trainer/{id}/{firstname}/{lastname}/{education}" +
+            "/{fatherName}/{motherName}/{pesel}/{login}/{password}")
+    public ResponseEntity<?> updateTrainer(@PathVariable("id") Integer employeeId,@PathVariable("firstname") String firstname, @PathVariable("lastname") String
+            lastName, @PathVariable("education") String education, @PathVariable("fatherName")
+                                                   String fatherName, @PathVariable("motherName") String motherName, @PathVariable("pesel") String pesel,
+                                           @PathVariable("login") String login, @PathVariable("password") String password) {
+        Employee employee = new Employee();
+        Account account = new Account();
+        employee.setEmployeeId(employeeId);
+        employee.setFirstname(firstname);
+        employee.setLastname(lastName);
+        employee.setEducation(education);
+        employee.setMotherName(motherName);
+        employee.setFatherName(fatherName);
+        employee.setPesel(pesel);
+        account.setLogin(login);
+        account.setPassword(password);
+        employee.setAccount(account);
+        account.setRole("ROLE_TRAINER");
+        if(employeeService.updateEmployee(employee))
+            return new ResponseEntity<>(HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
+
+
 //
 //    @PutMapping(value = "/trainer/{firstname}/{lastname}/{education}" +
 //            "/{fatherName}/{motherName}/{pesel}/{login}/{password}")
@@ -105,15 +132,16 @@ public class AdminController {
     }
     /**
      * fetching trainer by name
-     * @param firstname
+     * @param pesel
      * @return
      */
-    @GetMapping(value = "/trainer/{name}", produces = "application/json")
-    public ResponseEntity<Employee> fetchEmployee(@PathVariable("name") String firstname, String pesel){
-        Employee employee = employeeService.getEmployeeByFirstnameAndPesel(firstname, pesel);
+    @GetMapping(value = "/trainer/{pesel}", produces = "application/json")
+    public ResponseEntity<Employee> fetchEmployee(@PathVariable("pesel") String pesel){
+        Employee employee = employeeService.getEmployeeByPesel(pesel);
         if(employee == null){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        System.out.println(employee);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 

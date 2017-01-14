@@ -36,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label for="pesel">Pesel:</label>
-                <input ng-maxlength="30" required type="text" id="pesel" name="pesel" ng-model="employee.pesel" class="form-control inputColor">
+                <input ng-minlength="11" ng-maxlength="11" required type="number" id="pesel" name="pesel" ng-model="employee.pesel" class="form-control inputColor">
                 <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.pesel.$error.required">wpisz pesel</span>
                 <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.pesel.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
             </div>

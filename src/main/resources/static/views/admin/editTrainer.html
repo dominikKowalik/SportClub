@@ -9,6 +9,8 @@
                 <th>Imie Matki</th>
                 <th>Imie Ojca</th>
                 <th>Pesel</th>
+                <th>Login</th>
+                <th>Haslo</th>
             </tr>
             </thead>
             <tbody>
@@ -19,6 +21,8 @@
                 <td>{{ x.motherName }}</td>
                 <td>{{ x.fatherName }}</td>
                 <td>{{ x.pesel }}</td>
+                <td>{{ x.account.login }}</td>
+                <td>{{ x.account.password }}</td>
             </tr>
             </tbody>
         </table>
@@ -31,39 +35,39 @@
             <div class="col-md-6 mycontent-left">
                 <div class="form-group">
                     <label for="firstname">Imie:</label>
-                    <input ng-maxlength="30" required ng-model="employeeToEdit.firstname" value="employeeToEdit.firstname" type="text" class="form-control inputColor" id="firstname" name="firstname">
+                    <input ng-maxlength="30" required ng-model="employeesToEdit[0].firstname" type="text" class="form-control inputColor" id="firstname" name="firstname">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.firstname.$error.required">wpisz imie</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.firstname.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
                 <div class="form-group">
                     <label for="lastname">Nazwisko:</label>
-                    <input ng-maxlength="30" required type="text" class="form-control inputColor" id="lastname" name="lastname" ng-model="employeeToEdit.lastname">
+                    <input ng-maxlength="30" required type="text" class="form-control inputColor" id="lastname" name="lastname" ng-model="employeesToEdit[0].lastname">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.lastname.$error.required">wpisz nazwisko</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.lastname.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
                 <div class="form-group">
                     <label for="education">Wykształcenie:</label>
-                    <input ng-maxlength="30" required type="text" id="education" name="education" ng-model="employeeToEdit.education" class="form-control inputColor">
+                    <input ng-maxlength="30" required type="text" id="education" name="education" ng-model="employeesToEdit[0].education" class="form-control inputColor">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.education.$error.required">wpisz wyksztalcenie</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.education.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
                 <div class="form-group">
                     <label for="education">Imie matki:</label>
-                    <input ng-maxlength="30" required type="text" id="motherName" name="motherName" ng-model="employeeToEdit.motherName"
+                    <input ng-maxlength="30" required type="text" id="motherName" name="motherName" ng-model="employeesToEdit[0].motherName"
                            class="form-control inputColor">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.motherName.$error.required">wpisz imie matki</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.motherName.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
                 <div class="form-group">
                     <label for="fatherName">Imie ojca:</label>
-                    <input ng-maxlength="30" required type="text" id="fatherName" name="fatherName" ng-model="employeeToEdit.fatherName"
+                    <input ng-maxlength="30" required type="text" id="fatherName" name="fatherName" ng-model="employeesToEdit[0].fatherName"
                            class="form-control inputColor">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.fatherName.$error.required">wpisz imie ojca</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.fatherName.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
                 <div class="form-group">
                     <label for="pesel">Pesel:</label>
-                    <input ng-maxlength="30" required type="text" id="pesel" name="pesel" ng-model="employeeToEdit.pesel" class="form-control inputColor">
+                    <input ng-minlength="11"  string-to-number ng-maxlength="11" required type="number" id="pesel" name="pesel" ng-model="employeesToEdit[0].pesel" class="form-control inputColor">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.pesel.$error.required">wpisz pesel</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.pesel.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
@@ -71,13 +75,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="login">Login tworzonego użytkownika:</label>
-                    <input ng-maxlength="30" required type="text" id="login" name="login" ng-model="employeeToEdit.account.login" class="form-control inputColor">
+                    <input ng-maxlength="30" required type="text" id="login" name="login" ng-model="employeesToEdit[0].account.login" class="form-control inputColor">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.login.$error.required">wpisz login</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.login.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
                 </div>
                 <div class="form-group">
                     <label for="password">Haslo tworzonego użytkownika:</label>
-                    <input ng-maxlength="30" required type="text" id="password" name="password" ng-model="employeeToEdit.account.password"
+                    <input ng-maxlength="30" required type="text" id="password" name="password" ng-model="employeesToEdit[0].account.password"
                            class="form-control inputColor">
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.password.$error.required">wpisz haslo</span>
                     <span class="secondary-font-color"  ng-show="trainerForm.$dirty  && trainerForm.password.$error.maxlength">maksymalna dlugość tekstu to 30 znaków</span>
@@ -87,7 +91,7 @@
         <hr/>
         <div class="row">
             <div class="col-md-2">
-                <button ng-click="editTrainer()" ng-disabled="trainerForm.$invalid" type="button" class="btn btn-success btn-block">Aktualizuj Trenera</button>
+                <button ng-click="updateTrainer()" ng-disabled="trainerForm.$invalid" type="button" class="btn btn-success btn-block">Aktualizuj Trenera</button>
             </div>
             <div class="col-md-2">
                 <button ng-click="clearTrainerToEditForm()" ng-disabled="trainerForm.$pristine" type="button" class="form-control row btn btn-default btn-block">Resetuj Fromularz</button>
