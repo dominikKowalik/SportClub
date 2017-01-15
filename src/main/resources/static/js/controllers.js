@@ -4,12 +4,11 @@
 sportClubApp.controller("main", ['$scope', '$rootScope', '$log', 'AuthenticationService', 'CredentialsService', 'ClubService',
     function ($scope, $rootScope, $log, AuthenticationService, CredentialsService, ClubService) {
         $log.log("main controller");
-
         var login = CredentialsService.getLogin();
         var authHeader = CredentialsService.getAuthHeader();
         $log.log(login + ':' + authHeader);
         if (authHeader != null && login != null) {
-            ClubService.setClubName();
+            ClubService.setClub();
             AuthenticationService.login(login);
         } else {
             window.location.replace('/#/login');
@@ -29,16 +28,21 @@ sportClubApp.controller("loginController", ['$scope', '$rootScope', '$log', 'Aut
             CredentialsService.setAuthHeader(login, password);
             CredentialsService.setLogin(login);
             AuthenticationService.login(login);
-            ClubService.setClubName();
         }
     }]);
 
 sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'AuthenticationService'
-    , 'path','trainerService', function ($scope, $rootScope, $log, AuthenticationService, path,trainerService) {
+    , 'path','trainerService', 'ClubService', function ($scope, $rootScope, $log, AuthenticationService, path,trainerService, ClubService) {
         $log.log("Admin Controller");
         // saving authentication header and invoke login function
         $scope.logout = function () {
             AuthenticationService.logout();
+        }
+
+        ClubService.setClub();
+        $rootScope.club1 = {
+            logoToSend: '',
+            descriptionToSend:''
         }
 
         var newEmployee = function () {
@@ -61,8 +65,27 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
         $scope.employee = newEmployee();
         $scope.employeeToEdit = newEmployee()
 
-        $scope.trainers = '';
+        $scope.trainers = '' ;
         $scope.employeesToEdit = '';
+
+        $scope.patchClub = function(){
+
+            $log.log("patchClub");
+            $log.log($rootScope.club1.descriptionToSend);
+            $log.log($rootScope.club1.logoToSend);
+
+            var promise =
+                trainerService.updateClub($rootScope.club1.logoToSend, $rootScope.club1.descriptionToSend);
+            promise.then(
+                function (payload) {
+                    $log.log(payload.status);
+                    ClubService.setClub();
+                },
+                function (errPayload) {
+                    $log.log(errPayload.status);
+                }
+            )
+        }
 
         $scope.clearForm = function () {
 
@@ -97,8 +120,10 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
             promise.then(
                 function (payload) {
                     $log.log(payload.status);
+                    alert("Operacja powiodła się")
                 },function(errPayload) {
                     $log.log(errPayload.status);
+                    alert("Operacja nie powiodła się")
                 }
             )
         };
@@ -112,6 +137,7 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
 
             promise.then(
             function(payload) {
+                alert("Operacja powiodła się")
                 $log.log(payload.status);
             },
             function(errorPayload) {
@@ -127,6 +153,7 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
             promise.then(
                 function(payload) {
                     $log.log(payload.status);
+                    alert("Operacja powiodła się")
                     $scope.fetchAllTrainers();
                 },
                 function(errorPayload) {
@@ -168,8 +195,6 @@ sportClubApp.controller("adminController", ['$scope', '$rootScope', '$log', 'Aut
            $scope.employeeToAddressEditId = id;
        }
 
-
-
         $log.log($scope.club.name);
     }]);
 
@@ -190,11 +215,9 @@ sportClubApp.controller("trainerController", ['$scope', '$rootScope', '$log', 'A
                     $scope.findedTrainer =  [ newEmployee() ];
                 });
 
+
+
         $scope.logout = function () {
             AuthenticationService.logout();
         }
-
-
-
-
     }]);

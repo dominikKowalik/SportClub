@@ -1,33 +1,48 @@
-<link rel="stylesheet" type="text/css" href="css/stylesAdmin.css" />
-<div  ng-controller="adminController" class="container-fullwidth" >
+<link rel="stylesheet" type="text/css" href="css/stylesAdmin.css"/>
+<div ng-controller="adminController" class="container-fullwidth">
     <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <h3 class="navbar-text">{{club.name}}</h3>
-        </div>
-        <ul class="nav navbar-nav">
-             <li><a id="aboutClub" name="aboutClub" href="#"> Dane Klubu </a></li></h4>
-             <li><a ng-click="fetchAllTrainers()" ui-sref=".trainers" id="trainers" name="trainers" href="#"> Trenerzy </a></li>
-             <li><a ui-sref=".addTrainer" id="addTrainer" name="addTrainer" href="#"> Dodaj Trenera </a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><div>
-                <div style="margin-top:1vh">
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <input ng-maxlength="30" ng-model="trainerToFindPesel" required type="text" id="peselInput" name="peselInput"
-                                   ng-model="pesel" class="form-control inputColor" placeholder="wprowadz pesel">
-                            <button ng-click="findTrainer(trainerToFindPesel)" ui-sref=".findTrainer" class="btn btn-default">Szukaj</button>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <h3 class="navbar-text">{{club.name}}</h3>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a ui-sref=".clubDescription" id="aboutClub" name="aboutClub" href="#"> Dane Klubu </a></li>
+                </h4>
+                <li><a ng-click="fetchAllTrainers()" ui-sref=".trainers" id="trainers" name="trainers" href="#">
+                    Trenerzy </a></li>
+                <li><a ui-sref=".addTrainer" id="addTrainer" name="addTrainer" href="#"> Dodaj Trenera </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div>
+                        <div style="margin-top:1vh">
+                            <form name="findByPeselForm" class="form-inline">
+                                <div class="form-group">
+                                    <input ng-minlength="11" ng-maxlength="11" ng-model="trainerToFindPesel" required type="number"
+                                           id="peselInput" name="peselInput"
+                                           ng-model="pesel" class="form-control inputColor"
+                                           placeholder="wprowadz pesel">
+                                    <button ng-disabled="findByPeselForm.$invalid" ng-click="findTrainer(trainerToFindPesel)" ui-sref=".findTrainer"
+                                            class="btn btn-default">Szukaj
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
-            </div></li>d,lsd
-            <li><a ng-click="logout()" ui-sref="login"  href="#"><span class="glyphicon glyphicon-log-out"/> Wyloguj</a></li>
-        </ul>
+                    </div>
+                </li>
+                <li><a ng-click="logout()" ui-sref="login" href="#"><span class="glyphicon glyphicon-log-out"/> Wyloguj</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="background:white" class="fill-max-height col-md-10 col-md-offset-1 row">
+
+        <div class="col-md-10 col-md-offset-1" ui-view></div>
     </div>
-</nav>
-    <div class="col-md-12" ui-view></div>
+
 </div>
 
 
-
+<link rel="stylesheet" type="text/css" href="css/stylesAdmin.css"/>
+<link rel="stylesheet" type="text/css" href="css/stylesLogin.css"/>

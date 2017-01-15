@@ -35,10 +35,15 @@ public class Club {
     @Autowired
     private LocalDate dateOfEstablishment;
 
+    @Column(name = "herb_klubu")
+    private String logo;
+
+    @Column(name = "opis")
+    private String description;
+
     @Basic(optional = false)
     @Column(name = "nazwa", length = 30, unique = true)
     private String name;
-
 
     @OneToMany(mappedBy = "club",  fetch = FetchType.LAZY)
     @JsonManagedReference
@@ -68,6 +73,14 @@ public class Club {
 
     public void setDateOfEstablishment(LocalDate dateOfEstablishment) {
         this.dateOfEstablishment = dateOfEstablishment;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public String getName() {
@@ -102,16 +115,6 @@ public class Club {
         this.clubMemberSet = clubMemberSet;
     }
 
-
-    @Override
-    public String toString() {
-        return "Club{" +
-                "clubId=" + clubId +
-                ", dateOfEstablishment=" + dateOfEstablishment +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -122,6 +125,7 @@ public class Club {
         if (getClubId() != null ? !getClubId().equals(club.getClubId()) : club.getClubId() != null) return false;
         if (getDateOfEstablishment() != null ? !getDateOfEstablishment().equals(club.getDateOfEstablishment()) : club.getDateOfEstablishment() != null)
             return false;
+        if (getLogo() != null ? !getLogo().equals(club.getLogo()) : club.getLogo() != null) return false;
         return getName() != null ? getName().equals(club.getName()) : club.getName() == null;
 
     }
@@ -130,7 +134,16 @@ public class Club {
     public int hashCode() {
         int result = getClubId() != null ? getClubId().hashCode() : 0;
         result = 31 * result + (getDateOfEstablishment() != null ? getDateOfEstablishment().hashCode() : 0);
+        result = 31 * result + (getLogo() != null ? getLogo().hashCode() : 0);
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         return result;
+    }
+
+    public String getDescription(){
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

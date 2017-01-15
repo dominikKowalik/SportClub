@@ -11,7 +11,7 @@ sportClubApp.service("AuthenticationService", ['$http', '$rootScope', '$log', 'p
             } else if (role == 'ROLE_CLUBMEMBER') {
                 window.location.replace('/#/clubMember');
             } else if (role == 'ROLE_ADMIN') {
-                window.location.replace('/#/admin');
+                window.location.replace('/#/admin/clubDescription');
             } else {
                 alert("Użytkownik nie ma przydzielonej roli.\nPrzepraszamy!");
                 window.location.replace('/#/login');
@@ -74,20 +74,22 @@ sportClubApp.factory('AuthInterceptor', ['CredentialsService', function (Credent
 
 sportClubApp.service('ClubService', ['$http', 'path', '$log', '$rootScope', function ($http, path, $log, $rootScope) {
 
-    this.setClubName = function () {
-
+    this.setClub = function () {
         $rootScope.club = {
-            name: ''
+            name: '',
+            logo: '',
+            description: ''
         }
 
         $http.get(path + "admin/club").then(function (response) {
             $log.log(response);
             $log.log(response.data);
             $rootScope.club.name = response.data.name;
+            $rootScope.club.logo = response.data.logo;
+            $rootScope.club.description = response.data.description;
         }, function (errResponse) {
             console.error('Error while fetching');
         })
-
     }
     return this;
 }])
@@ -107,6 +109,10 @@ sportClubApp.factory('trainerService', ['$http', 'path','$q', function ($http, p
                 }
             );
 
+        },
+
+        'updateClub': function(url, description){
+            return $http.patch(path + "admin/club/" + description, url);
         },
 
         'fetchTrainer': function (pesel) {

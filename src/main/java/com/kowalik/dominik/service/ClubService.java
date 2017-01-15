@@ -21,4 +21,18 @@ public class ClubService {
     public Club saveEmployee(Club club) {
         return clubRepository.save(club);
     }
+
+    public boolean updateClub(Club club){
+        Club club1 = clubRepository.findOne(1);
+        if(club1 == null){
+            return false;
+        }else{
+            System.out.println(club.getDescription() + "  " + club.getLogo());
+            club1.setDescription(club.getDescription());
+            club1.setLogo(club.getLogo());
+            clubRepository.save(club1);
+            return true;
+        }
+    }
+
 }

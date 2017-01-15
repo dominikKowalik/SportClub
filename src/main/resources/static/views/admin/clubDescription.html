@@ -1,0 +1,50 @@
+<div class="row margin">
+    <label>Nazwa:</label> <span>{{club.name}}</span>
+</div>
+
+<div class="row margin">
+    <label>Logo:</label><img ng-src="{{club.logo}}" class="img-rounded img-responsive" alt="Cinque Terre">
+</div>
+
+<div class="row margin">
+    <label>Opis:</label> <div> {{club.description}} </div>
+</div>
+
+<hr/>
+
+<div class="row margin">
+
+<form name="clubEditForm" class="form">
+    <div class="from-group margin">
+        <label for="logoUrl">Wklej URL logo</label>
+        <input maxlength="255" required ng-model="club1.logoToSend" class="form-control validation" type="url" name="logoUrl" id="logoUrl">
+    </div>
+    <div class="from-group margin">
+        <label for="description">Description:</label>
+        <textarea required maxlength="255" ng-model="club1.descriptionToSend" class="form-control validation" rows="5" id="description" name="description"></textarea>
+    </div>
+    <button ng-disabled="clubEditForm.$invalid" ng-click="patchClub()" class="btn btn-default margin margin-bottom">Aktualizuj Dane</button>
+</form>
+</div>
+
+
+<style>
+
+    .validation.ng-dirty.ng-valid{
+        background-color: lightgreen;
+    }
+
+    .validation.ng-dirty.ng-invalid{
+        background-color: rgba(252, 83, 91, 0.91);
+
+    }
+
+
+    .margin{
+        margin-top: 2vh;
+    }
+
+    .margin-bottom{
+        margin-bottom: 2vh;
+    }
+</style>

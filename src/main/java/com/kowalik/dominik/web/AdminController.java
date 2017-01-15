@@ -34,6 +34,23 @@ public class AdminController {
         return new ResponseEntity<>(club, HttpStatus.OK);
     }
 
+    @PatchMapping(value = "/club/{description}"  )
+    public ResponseEntity<Object> patchClub(@PathVariable("description") String descrption,@RequestBody String logo ){
+        Club club = new Club();
+        club.setLogo(logo);
+        club.setDescription(descrption);
+
+        System.out.println(descrption + " " + logo);
+
+       if(clubService.updateClub(club)){
+           return new ResponseEntity<>(HttpStatus.OK);
+       }else{
+           return new ResponseEntity<>(HttpStatus.CONFLICT);
+       }
+    }
+
+
+
     @PostMapping(value = "/trainer/{firstname}/{lastname}/{education}" +
             "/{fatherName}/{motherName}/{pesel}/{login}/{password}")
     public ResponseEntity<?> insertTrainer(@PathVariable("firstname") String firstname, @PathVariable("lastname") String

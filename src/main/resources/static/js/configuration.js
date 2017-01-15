@@ -35,7 +35,15 @@ var sportClubApp = angular.module("sportClub", ['ui.router','ngCookies']).config
          }).state('trainer.personalInformation',{
              url: "/personalInformation",
              templateUrl: "views/trainer/personalInformation.html"
+         }).state('admin.clubDescription',{
+             url: "/clubDescription",
+             templateUrl: "views/admin/clubDescription.html"
+         }).state('trainer.clubDescription',{
+             url: "/clubDescription",
+             templateUrl: "views/trainer/clubDescription.html"
          })
+
+         $urlRouterProvider.otherwise('/clubDescription"')
      }]).config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
 }]);
