@@ -105,35 +105,6 @@ public class AdminController {
     }
 
 
-//
-//    @PutMapping(value = "/trainer/{firstname}/{lastname}/{education}" +
-//            "/{fatherName}/{motherName}/{pesel}/{login}/{password}")
-//    public ResponseEntity<?> updateTrainer(@PathVariable("firstname") String firstname, @PathVariable("lastname") String
-//            lastName, @PathVariable("education") String education, @PathVariable("fatherName")
-//                                                   String fatherName, @PathVariable("motherName") String motherName, @PathVariable("pesel") String pesel,
-//                                           @PathVariable("login") String login, @PathVariable("password") String password) {
-//        if(employeeService.isEmployeeExistsByFirstnameAndPesel(firstname, pesel)){
-//            return new ResponseEntity<>(HttpStatus.CONFLICT);
-//        }
-//        Employee employee = new Employee();
-//        Account account = new Account();
-//        Club club = new Club();
-//        club.setClubId(1);
-//        employee.setFirstname(firstname);
-//        employee.setLastname(lastName);
-//        employee.setEducation(education);
-//        employee.setMotherName(motherName);
-//        employee.setFatherName(fatherName);
-//        employee.setPesel(pesel);
-//        employee.setClub(club);
-//        account.setLogin(login);
-//        account.setPassword(password);
-//        employee.setAccount(account);
-//        account.setRole("ROLE_TRAINER");
-//        employeeService.
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
-
     /**
      * fetching all trainers
      * @return
